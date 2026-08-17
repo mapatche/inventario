@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-gray-50">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departamentos</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="h-full antialiased font-sans text-gray-900">
+
+    <!-- Contenedor Principal Centrado con un máximo de ancho -->
+    <div class="max-w-6xl mx-auto px-4 py-8">
+
+        <!-- Encabezado de la Página con Flexbox -->
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Control de Departamentos</h1>
+                <p class="mt-2 text-sm text-gray-600">Lista completa de los departamentos registrados en el sistema.</p>
+            </div>
+
+            <!-- Botón de Acción -->
+            <a href="{{ route('departments.create') }}" class="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg shadow hover:bg-blue-500 transition-colors cursor-pointer">
+                + Nuevo Departamento
+            </a>
+        </div>
+
+        <!-- Contenedor de la Tabla con Bordes Redondeados y Sombra -->
+        <div class="overflow-hidden bg-white border border-gray-200 rounded-xl shadow-md">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">#</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Nombre</th>
+                        <th class="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
+                    @foreach ($departments as $department)
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">{{ $loop->iteration }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">{{ $department->name }}</td>
+                        <td class="px-6 py-4 text-sm text-right font-medium space-x-3">
+                            <div class="flex items-center justify-end gap-2">
+
+                                <a href="{{ route('departments.edit', $department->uuid) }}" class="text-blue-600 hover:text-blue-900 transition-colors">Editar</a>
+                                <form action="{{ route('departments.destroy', $department) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a type="submit" class="text-red-600 hover:text-red-900 transition-colors">
+                                        Borrar
+                                    </a>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -35,13 +35,13 @@
                         <td class="px-6 py-4 text-sm text-gray-600">{{ $department->name }}</td>
                         <td class="px-6 py-4 text-sm text-right font-medium space-x-3">
                             <div class="flex items-center justify-end gap-2">
-                                <a href="{{ route('departments.edit', $department->uuid) }}" class="text-blue-600 hover:text-blue-900 transition-colors">Editar</a>
-                                <form action="{{ route('departments.destroy', $department) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                <a href="{{ route('departments.edit', $department) }}" class="text-blue-600 hover:text-blue-900 transition-colors">Editar</a>
+                                <form action="{{ route('departments.destroy', $department) }}" method="POST" onsubmit="return confirm('Eliminar?');">
                                     @csrf
                                     @method('DELETE')
-                                    <a type="submit" class="text-red-600 hover:text-red-900 transition-colors cursor-pointer">
-                                        Borrar
-                                    </a>
+                                    <button type="submit" class="text-red-600 hover:text-red-900 transition-colors cursor-pointer">
+                                        Guardar Cambios
+                                    </button>
                                 </form>
                             </div>
                         </td>

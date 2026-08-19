@@ -5,32 +5,37 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Department extends Model
+
+class Employee extends Model
 {
     use HasFactory;
     use HasUuids;
-    
+
     protected $fillable = [
-        'name',
-        'active'
+        'first_name',
+        'last_name',
+        'phone',
+        'email',
+        'active',
+        'department_id',
     ];
 
     public function uniqueIds(): array
     {
         return ['uuid'];
     }
-
+    
     public function getRouteKeyName(): string
     {
         return 'uuid';
     }
 
-
-    public function employees(): HasMany
+    public function department(): BelongsTo
     {
-        return $this->hasMany(Employee::class);
+        return $this->belongsTo(Department::class);
     }
+   
 
 }

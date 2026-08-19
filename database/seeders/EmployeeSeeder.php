@@ -2,18 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\Employee;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class EmployeeSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
+    /**
+     * Run the database seeds.
+     */
     public function run(): void
     {
-        $this->call([
-            DepartmentSeeder::class,
-            EmployeeSeeder::class,
-        ]);
+        Employee::factory()->count(50)->create();
     }
 }

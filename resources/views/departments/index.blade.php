@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="es" class="h-full bg-gray-50">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Departamentos</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
-
-<body class="h-full antialiased font-sans text-gray-900">
+@section('contenido')
     <div class="max-w-6xl mx-auto px-4 py-8">
         <div class="flex items-center justify-between mb-8">
             <div>
@@ -51,7 +43,4 @@
             </table>
         </div>
     </div>
-
-</body>
-
-</html>
+@endsection

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+<body class="bg-gray-100 flex">
+
+  <aside class="w-64 h-screen bg-white border-r border-gray-200 p-4 flex flex-col justify-between">
+    <div class="space-y-4">
+      <h2 class="text-xl font-bold text-gray-800 px-2">Inventario</h2>
+      
+      <nav class="space-y-1">
+
+        <a href="{{url('/')}}" class="block px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 font-medium">
+          Inicio
+        </a>
+
+        <details class="group" {{ request()->routeIs('employees.*', 'departments.*') ? 'open' : '' }} >
+          <summary class="flex items-center justify-between px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 cursor-pointer font-medium select-none">
+            <span>Personal</span>
+
+            <svg class="w-4 h-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </summary>
+          
+          <div class="pl-6 pt-1 space-y-1">
+            <a href="{{ route('departments.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('departments.*') ? 'font-bold' : '' }}">Departamentos</a>
+            <a href="{{ route('employees.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('employees.*') ? 'font-bold' : '' }}">Empleados</a>
+          </div>
+        </details>
+        
+      </nav>
+    </div>
+  </aside>
+
+  <main class="flex-1 p-8">
+    @yield('contenido')
+  </main>
+
+</body>
+</html>

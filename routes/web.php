@@ -6,8 +6,7 @@ use App\Models\Department;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $departments = Department::all()->where('active', '=', 1);
-    return view('departments.index', compact('departments'));
+    return view('welcome');
 });
 
 Route::resource('departments', DepartmentController::class);

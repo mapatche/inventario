@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Departamentos</title>
+    <title>Empleados</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
@@ -12,11 +12,11 @@
     <div class="max-w-6xl mx-auto px-4 py-8">
         <div class="flex items-center justify-between mb-8">
             <div>
-                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Control de Departamentos</h1>
-                <p class="mt-2 text-sm text-gray-600">Lista completa de los departamentos registrados en el sistema.</p>
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Control de Empleados</h1>
+                <p class="mt-2 text-sm text-gray-600">Lista completa de los empleados registrados en el sistema.</p>
             </div>
-            <a href="{{ route('departments.create') }}" class="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg shadow hover:bg-blue-500 transition-colors cursor-pointer">
-                + Nuevo Departamento
+            <a href="{{ route('employees.create') }}" class="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg shadow hover:bg-blue-500 transition-colors cursor-pointer">
+                + Nuevo Empleado
             </a>
         </div>
         <div class="overflow-hidden bg-white border border-gray-200 rounded-xl shadow-md">
@@ -25,18 +25,25 @@
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">#</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Nombre</th>
+                        {{-- <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Apellido</th> --}}
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Telefono</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Correo</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Deparatmento</th>
                         <th class="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
-                    @foreach ($departments as $department)
+                    @foreach ($employees as $employee)
                     <tr class="hover:bg-gray-50 transition-colors">
                         <td class="px-6 py-4 text-sm font-medium text-gray-900">{{ $loop->iteration }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-600">{{ $department->name }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">{{ $employee->first_name }} {{ $employee->last_name }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">{{ $employee->phone }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">{{ $employee->email }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">{{ $employee->department->name }}</td>
                         <td class="px-6 py-4 text-sm text-right font-medium space-x-3">
                             <div class="flex items-center justify-end gap-2">
-                                <a href="{{ route('departments.edit', $department) }}" class="text-blue-600 hover:text-blue-900 transition-colors">Editar</a>
-                                <form action="{{ route('departments.destroy', $department) }}" method="POST" onsubmit="return confirm('Eliminar?');">
+                                <a href="{{ route('employees.edit', $employee) }}" class="text-blue-600 hover:text-blue-900 transition-colors">Editar</a>
+                                <form action="{{ route('employees.destroy', $employee) }}" method="POST" onsubmit="return confirm('Eliminar?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:text-red-900 transition-colors cursor-pointer">

@@ -9,7 +9,7 @@ class DepartmentController extends Controller
 {
     public function index()
     {
-        $departments = Department::all()->where('active', '=', 1);
+        $departments = Department::where('active', 1)->get();
         return view('departments.index', compact('departments'));
     }
 
@@ -39,8 +39,7 @@ class DepartmentController extends Controller
 
     public function destroy(Department $department)
     {
-        $department->active = false;
-        $department->save();
+        $department->update(['active' => 0]);
         return redirect()->route('departments.index');
     }
 }

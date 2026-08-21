@@ -8,17 +8,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('brands', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
             $table->string('name')->unique();
-            $table->boolean('active')->default(1);
+            $table->boolean('activo')->default(1);
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('brands');
     }
 };

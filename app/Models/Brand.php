@@ -6,24 +6,24 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Type extends Model
+class Brand extends Model
 {
-    use HasFactory;
     use HasUuids;
+    use HasFactory;
 
     protected $fillable = [
         'name',
-        'active'
+        'activo'
     ];
 
-    public function uniqueIds(): array
+    public function uniqueIds()
     {
         return ['uuid'];
     }
-    
-    public function getRouteKeyName(): string
+
+        public function getRouteKeyName(): string
     {
         return 'uuid';
     }
-    
+
 }

@@ -12,7 +12,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::where('active', 1)->get();
+        $employees = Employee::where('active', 1)->paginate(10);
         return view('employees.index', compact('employees'));
     }
 

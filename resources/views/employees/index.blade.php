@@ -26,7 +26,7 @@
                 <tbody class="divide-y divide-gray-200 bg-white">
                     @foreach ($employees as $employee)
                     <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 text-sm font-medium text-gray-900">{{ $loop->iteration }}</td>
+                        <td class="px-6 py-4 text-sm font-medium text-gray-900">{{  $employees->firstItem() +  $loop->iteration -1 }}</td>
                         <td class="px-6 py-4 text-sm text-gray-600">{{ $employee->first_name }} {{ $employee->last_name }}</td>
                         <td class="px-6 py-4 text-sm text-gray-600">{{ $employee->phone }}</td>
                         <td class="px-6 py-4 text-sm text-gray-600">{{ $employee->email }}</td>
@@ -47,6 +47,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="mt-6 ps-5">
+                {{ $employees->links() }}
+            </div>
         </div>
     </div>
 @endsection

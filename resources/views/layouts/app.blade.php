@@ -31,10 +31,11 @@
           <div class="pl-6 pt-1 space-y-1">
             <a href="{{ route('departments.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('departments.*') ? 'font-bold' : '' }}">Departamentos</a>
             <a href="{{ route('employees.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('employees.*') ? 'font-bold' : '' }}">Empleados</a>
+            <a href="{{ route('employees.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('employees.*') ? 'font-bold' : '' }}">Asignacion</a>
           </div>
         </details>
 
-        <details class="group" {{ request()->routeIs('brands.*', 'categories.*') ? 'open' : '' }} >
+        <details class="group" {{ request()->routeIs('brands.*', 'itemtypes.*', 'resources.*') ? 'open' : '' }} >
           <summary class="flex items-center justify-between px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 cursor-pointer font-medium select-none">
             <span>Recursos</span>
 
@@ -44,8 +45,9 @@
           </summary>
           
           <div class="pl-6 pt-1 space-y-1">
-            <a href="{{ route('departments.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('departments.*') ? 'font-bold' : '' }}">Departamentos</a>
-            <a href="{{ route('employees.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('employees.*') ? 'font-bold' : '' }}">Empleados</a>
+            <a href="{{ route('itemtypes.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('itemtypes.*') ? 'font-bold' : '' }}">Tipos</a>
+            <a href="{{ route('employees.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('employees.*') ? 'font-bold' : '' }}">Marcas</a>
+            <a href="{{ route('itemtypes.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('itemtypes.*') ? 'font-bold' : '' }}">Recursos</a>
           </div>
         </details>
         

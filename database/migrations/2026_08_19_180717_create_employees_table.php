@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('employees', function (Blueprint $table) {
@@ -19,16 +16,12 @@ return new class extends Migration
             $table->string("last_name");
             $table->string("phone");
             $table->string("email");
-            // $table->string("email")->unique();
             $table->boolean("active")->default(1);
             $table->foreignIdFor(Department::class)->constrained();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('employees');

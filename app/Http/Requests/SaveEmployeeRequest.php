@@ -2,10 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-
 class SaveEmployeeRequest extends FormRequest
 {
     public function authorize(): bool
@@ -22,7 +19,6 @@ class SaveEmployeeRequest extends FormRequest
         'first_name'    => 'required|string|min:2|max:50',
         'last_name'     => 'required|string|min:2|max:50',
         'phone'         => 'required|string|regex:/^[0-9+\s\-()]{7,20}$/',
-        // 'email'         => 'required|email:rfc|max:255|unique:employees,email,' . $employeeId,
         'email'         => [
                             'required',
                             'email:rfc',

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SaveTypeRequest extends FormRequest
+class SaveBrandRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -14,12 +14,14 @@ class SaveTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required|string|min:3|max:50|unique:types,name",
-            "active" => "sometimes|boolean"
+            'name' => 'required|string|min:3|max:30|unique:brands,name',
+            'active' => 'sometimes|boolean'
         ];
     }
 
-    public function messages (): array{
+
+    public function messages()
+    {
         return [
                 'name.required'    => 'El nombre es obligatorio.',
                 'name.string'      => 'El nombre debe ser un texto válido.',

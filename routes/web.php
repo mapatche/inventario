@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
-use App\Models\Department;
+use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,3 +11,4 @@ Route::get('/', function () {
 
 Route::resource('departments', DepartmentController::class);
 Route::resource('employees', EmployeeController::class);
+Route::resource('itemtypes', TypeController::class);

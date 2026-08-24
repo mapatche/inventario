@@ -31,7 +31,7 @@
           <div class="pl-6 pt-1 space-y-1">
             <a href="{{ route('departments.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('departments.*') ? 'font-bold' : '' }}">Departamentos</a>
             <a href="{{ route('employees.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('employees.*') ? 'font-bold' : '' }}">Empleados</a>
-            {{-- <a href="{{ route('employees.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('employees.*') ? 'font-bold' : '' }}">Asignacion</a> --}}
+            {{-- <a href="{{ route('loans.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('loans.*') ? 'font-bold' : '' }}">Asignacion</a> --}}
           </div>
         </details>
 
@@ -47,7 +47,7 @@
           <div class="pl-6 pt-1 space-y-1">
             <a href="{{ route('itemtypes.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('itemtypes.*') ? 'font-bold' : '' }}">Tipos</a>
             <a href="{{ route('brands.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('brands.*') ? 'font-bold' : '' }}">Marcas</a>
-            {{-- <a href="{{ route('items.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('items.*') ? 'font-bold' : '' }}">Recursos</a> --}}
+            <a href="{{ route('items.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('items.*') ? 'font-bold' : '' }}">Items</a>
           </div>
         </details>
         

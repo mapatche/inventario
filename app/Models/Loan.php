@@ -6,44 +6,39 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Override;
 
-class Item extends Model
+class Loan extends Model
 {
     use HasFactory;
     use HasUuids;
 
     protected $fillable = [
-        'model',
-        'serial',
         'notes',
-        'type_id',
-        'brand_id',
         'active',
+        'employee_id',
+        'item_id',
     ];
 
-    public function brand(): BelongsTo
-    {
-        return $this->belongsTo(Brand::class);
-    }
-
-    public function type(): BelongsTo
-    {
-        return $this->belongsTo(Type::class);
-    }
-
-    public function uniqueIds(): array
+    #[Override]
+    public function uniqueIds()
     {
         return ['uuid'];
     }
 
+    #[Override]
     public function getRouteKeyName()
     {
         return 'uuid';
     }
 
-    public function loans(): HasMany
+    public function item(): BelongsTo
     {
-        return $this->hasMany(Loan::class);
+        return $this->belongsTo(Item::class);
+    }
+
+    public function employee(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
     }
 }

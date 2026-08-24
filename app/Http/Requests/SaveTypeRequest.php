@@ -14,19 +14,19 @@ class SaveTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required|string|min:3|max:50|unique:types,name",
-            "active" => "sometimes|boolean"
+            'name' => 'required|string|min:3|max:50|unique:types,name',
+            'active' => 'sometimes|boolean',
         ];
     }
 
-    public function messages (): array{
+    public function messages(): array
+    {
         return [
-                'name.required'    => 'El nombre es obligatorio.',
-                'name.string'      => 'El nombre debe ser un texto válido.',
-                'name.min'         => 'El nombre debe tener al menos :min caracteres.',
-                'name.max'         => 'El nombre no puede tener más de :max caracteres.',
-                'name.unique'      => 'Ese nombre ya esta en uso.',
-                ];
+            'name.required' => 'El nombre es obligatorio.',
+            'name.string' => 'El nombre debe ser un texto válido.',
+            'name.min' => 'El nombre debe tener al menos :min caracteres.',
+            'name.max' => 'El nombre no puede tener más de :max caracteres.',
+            'name.unique' => 'Ese nombre ya esta en uso.',
+        ];
     }
-
 }

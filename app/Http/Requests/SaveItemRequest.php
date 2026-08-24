@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Override;
 
 class SaveItemRequest extends FormRequest
 {
@@ -14,9 +13,19 @@ class SaveItemRequest extends FormRequest
 
     public function rules(): array
     {
+
+        $itemId = $this->route('item') ? $this->route('item')->id : null;
+        $isUpdating = $itemId !== null;
+
         return [
             'model' => 'required|string|min:3|max:20',
-            'serial' => 'required|string|min:3|max:20|unique:items,serial',
+            'serial' => [
+                'required',
+                'string',
+                'min:3',
+                'max:20',
+                $isUpdating ? 'unique:items,serial,'.$itemId : 'unique:items,serial,',
+            ],
             'notes' => 'nullable|string|max:255',
             'type_id' => 'required|integer|exists:types,id',
             'brand_id' => 'required|integer|exists:brands,id',
@@ -24,7 +33,6 @@ class SaveItemRequest extends FormRequest
         ];
     }
 
-    #[Override]
     public function messages()
     {
         return [

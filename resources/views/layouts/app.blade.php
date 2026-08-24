@@ -35,7 +35,7 @@
           </div>
         </details>
 
-        <details class="group" {{ request()->routeIs('brands.*', 'itemtypes.*', 'resources.*') ? 'open' : '' }} >
+        <details class="group" {{ request()->routeIs('brands.*', 'itemtypes.*', 'items.*') ? 'open' : '' }} >
           <summary class="flex items-center justify-between px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 cursor-pointer font-medium select-none">
             <span>Recursos</span>
 

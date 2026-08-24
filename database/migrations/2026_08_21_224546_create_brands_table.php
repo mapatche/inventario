@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->string('name')->unique();
-            $table->boolean('activo')->default(1);
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

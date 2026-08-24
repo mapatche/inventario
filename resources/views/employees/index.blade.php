@@ -47,7 +47,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="mt-6 ps-5">
+            <div class="py-3 px-5 border-t border-gray-200 bg-gray-50">
                 {{ $employees->links() }}
             </div>
         </div>

@@ -11,7 +11,7 @@ class BrandFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->randomElement(['Pfizzer', 'DELL', 'HP', 'Lenovo', 'Alienware']),
-            'activo' => fake()->boolean(100)
+            'active' => fake()->boolean(100)
         ];
     }
 }

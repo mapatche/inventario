@@ -13,7 +13,7 @@ class Brand extends Model
 
     protected $fillable = [
         'name',
-        'activo'
+        'active'
     ];
 
     public function uniqueIds()

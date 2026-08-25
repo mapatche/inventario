@@ -46,4 +46,12 @@ class Item extends Model
     {
         return $this->hasMany(Loan::class);
     }
+
+    public function scopeAvailable($query)
+    {
+        return $query->where('active', 1)
+            ->whereDoesntHave('loans', function ($q) {
+                $q->where('active', 1);
+            });
+    }
 }

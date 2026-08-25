@@ -19,7 +19,7 @@
           Inicio
         </a>
 
-        <details class="group" {{ request()->routeIs('employees.*', 'departments.*') ? 'open' : '' }} >
+        <details class="group" {{ request()->routeIs('employees.*', 'departments.*', 'loans.*') ? 'open' : '' }} >
           <summary class="flex items-center justify-between px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 cursor-pointer font-medium select-none">
             <span>Personal</span>
 
@@ -31,7 +31,7 @@
           <div class="pl-6 pt-1 space-y-1">
             <a href="{{ route('departments.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('departments.*') ? 'font-bold' : '' }}">Departamentos</a>
             <a href="{{ route('employees.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('employees.*') ? 'font-bold' : '' }}">Empleados</a>
-            {{-- <a href="{{ route('loans.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('loans.*') ? 'font-bold' : '' }}">Asignacion</a> --}}
+            <a href="{{ route('loans.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('loans.*') ? 'font-bold' : '' }}">Asignacion</a>
           </div>
         </details>
 

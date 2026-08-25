@@ -9,7 +9,7 @@ class DepartmentFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => substr(fake()->unique()->jobTitle(), 0, 25),
+            'name' => $this->faker->unique()->randomElement(['Contabilidad', 'Sistemas', 'Legal', 'Ventas', 'Compras', 'RRHH', 'Piso', 'Seguridad']),
             'active' => fake()->boolean(90),
         ];
     }

@@ -16,8 +16,8 @@ class SaveLoanRequest extends FormRequest
         return [
             'notes' => 'nullable|string|max:255',
             'active' => 'sometimes|boolean',
-            'employee_id' => 'required|integer|exists:employee,id',
-            'item_id' => 'required|integer|exists:item,id',
+            'employee_id' => 'required|integer|exists:employees,id',
+            'item_id' => 'required|integer|exists:items,id',
         ];
     }
 
@@ -27,6 +27,8 @@ class SaveLoanRequest extends FormRequest
             'notes.max' => 'Las notas no puede tener más de :max caracteres.',
             'notes.string' => 'Las notas deben ser cadenas de texto.',
 
+            'active.boolean' => 'Debe ser booleano.',
+
             'employee_id.required' => 'El empleado es requerido',
             'employee_id.integer' => 'Debe ser un numero',
             'employee_id.exists' => 'No existe el empleado que deseas asignar.',
@@ -35,7 +37,6 @@ class SaveLoanRequest extends FormRequest
             'item_id.integer' => 'Debe ser un numero',
             'item_id.exists' => 'No existe el item que deseas asignar.',
 
-            'active.boolean' => 'Debe ser booleano.',
         ];
     }
 }

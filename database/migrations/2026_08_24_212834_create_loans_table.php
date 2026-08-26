@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->string('notes');
+            $table->string('notes')->nullable();
             $table->boolean('active')->default(1);
             $table->foreignId('employee_id')->constrained();
             $table->foreignId('item_id')->constrained();

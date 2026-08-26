@@ -14,7 +14,7 @@ class LoanFactory extends Factory
             'notes' => fake()->sentence(6),
             'active' => fake()->boolean(95),
             'employee_id' => Employee::inRandomOrder()->first()->id ?? Employee::factory(),
-            'item_id' => Item::inRandomOrder()->first()->id ?? Item::factory(),
+            'item_id' => Item::factory()->create()->id,
         ];
     }
 }

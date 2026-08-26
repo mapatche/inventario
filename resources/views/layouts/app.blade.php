@@ -11,7 +11,8 @@
 
   <aside class="w-64 h-screen bg-white border-r border-gray-200 p-4 flex flex-col justify-between">
     <div class="space-y-4">
-      <h2 class="text-xl font-bold text-gray-800 px-2">Inventario</h2>
+      <img src="{{ asset('logofiscomex.png') }}" alt="Mi foto" class="w-auto h-auto rounded-lg">
+      <h2 class="text-xl font-bold text-[#00347b] px-2 text-center">Inventario</h2>
       
       <nav class="space-y-1">
 

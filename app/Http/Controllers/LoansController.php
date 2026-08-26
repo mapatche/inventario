@@ -7,12 +7,14 @@ use App\Models\Employee;
 use App\Models\Item;
 use App\Models\Loan;
 use App\Models\Type;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class LoansController extends Controller
 {
     public function index()
     {
-        $loans = Loan::where('active', 1)->paginate(10);
+        $loans = Loan::where('active', 1)->orderBy('created_at', 'desc')->paginate(10);
 
         return view('loans.index', compact('loans'));
     }
@@ -50,5 +52,33 @@ class LoansController extends Controller
             ->get();
 
         return response()->json($items);
+    }
+
+    public function loanToSheet($idLoan)
+    {
+        $loan = Loan::with('employee.department', 'item.brand', 'item.type')->findOrFail($idLoan);
+
+        $rutaArchivo = storage_path('app/templates/formato_prestamo.xlsx');
+        $spreadsheet = IOFactory::load($rutaArchivo);
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('B7', $loan->employee->first_name.' '.$loan->employee->last_name);
+        $sheet->setCellValue('B8', $loan->employee->department->name);
+        $sheet->setCellValue('B13', $loan->item->type->name);
+        $sheet->setCellValue('B14', $loan->item->brand->name);
+        $sheet->setCellValue('B15', $loan->item->model);
+        $sheet->setCellValue('B16', $loan->item->serial);
+        $sheet->setCellValue('B17', $loan->item->notes);
+        $sheet->setCellValue('B24', $loan->created_at);
+        $sheet->setCellValue('B25', $loan->uuid);
+        $sheet->setCellValue('B26', $loan->notes);
+
+        $writer = new Xlsx($spreadsheet);
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="formato.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
+        exit;
     }
 }

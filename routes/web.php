@@ -19,3 +19,4 @@ Route::resource('brands', BrandController::class);
 Route::resource('items', ItemController::class);
 Route::resource('loans', LoansController::class);
 Route::get('loans/items_by_type/{id}', [LoansController::class, 'itemsByType']);
+Route::get('loans/excelame/{id}', [LoansController::class, 'loanToSheet'])->name('excelsior');

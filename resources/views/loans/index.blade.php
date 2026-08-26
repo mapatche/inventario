@@ -35,6 +35,7 @@
                         <td class="px-6 py-4 text-sm text-gray-600">{{ $loan->notes }}</td>
                         <td class="px-6 py-4 text-sm text-right font-medium space-x-3">
                             <div class="flex items-center justify-end gap-2">
+                                <a href="{{ route('excelsior', $loan->id) }}" class="text-green-600 hover:text-blue-900 transition-colors">Formato</a>
                                 <a href="{{ route('loans.edit', $loan) }}" class="text-blue-600 hover:text-blue-900 transition-colors">Editar</a>
                                 <form action="{{ route('loans.destroy', $loan) }}" method="POST" onsubmit="return confirm('Eliminar?');">
                                     @csrf

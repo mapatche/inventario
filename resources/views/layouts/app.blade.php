@@ -11,7 +11,7 @@
 
   <aside class="w-64 h-screen bg-white border-r border-gray-200 p-4 flex flex-col justify-between">
     <div class="space-y-4">
-      <img src="{{ asset('logofiscomex.png') }}" alt="Mi foto" class="w-auto h-auto rounded-lg">
+      <img src="{{ asset('logofiscomex.png') }}" alt="Logo de FISCOMEX" class="w-auto h-auto rounded-lg">
       <h2 class="text-xl font-bold text-[#00347b] px-2 text-center">Inventario</h2>
       
       <nav class="space-y-1">
@@ -30,8 +30,10 @@
           </summary>
           
           <div class="pl-6 pt-1 space-y-1">
+          @role('admin')
             <a href="{{ route('departments.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('departments.*') ? 'font-bold' : '' }}">Departamentos</a>
             <a href="{{ route('employees.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('employees.*') ? 'font-bold' : '' }}">Empleados</a>
+          @endrole
             <a href="{{ route('loans.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('loans.*') ? 'font-bold' : '' }}">Asignacion</a>
           </div>
         </details>
@@ -46,12 +48,18 @@
           </summary>
           
           <div class="pl-6 pt-1 space-y-1">
+          @role('admin')
             <a href="{{ route('itemtypes.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('itemtypes.*') ? 'font-bold' : '' }}">Tipos</a>
             <a href="{{ route('brands.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('brands.*') ? 'font-bold' : '' }}">Marcas</a>
+          @endrole
             <a href="{{ route('items.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('items.*') ? 'font-bold' : '' }}">Items</a>
           </div>
         </details>
         
+        <form method="POST" action="{{ route('logout') }}">
+          @csrf
+          <button type="submit" class="mx-auto w-full block text-left px-3 py-2 text-red-800 rounded-lg hover:bg-gray-100 cursor-pointer font-medium">Salir</button>
+        </form>
       </nav>
     </div>
   </aside>

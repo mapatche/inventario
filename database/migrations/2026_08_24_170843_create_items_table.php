@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('model');
             $table->string('serial');
             $table->string('notes');
+            $table->foreignId('section_id')->constrained();
             $table->foreignId('type_id')->constrained();
             $table->foreignId('brand_id')->constrained();
             $table->boolean('active')->default(1);

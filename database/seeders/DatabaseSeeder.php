@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             EmployeeSeeder::class,
             TypeSeeder::class,
             BrandSeeder::class,
+            SectionSeeder::class,
             ItemSeeder::class,
             LoanSeeder::class,
             PrivilegesSeeder::class,

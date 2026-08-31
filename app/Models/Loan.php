@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Override;
 
 class Loan extends Model
 {
@@ -20,13 +19,11 @@ class Loan extends Model
         'item_id',
     ];
 
-    #[Override]
     public function uniqueIds()
     {
         return ['uuid'];
     }
 
-    #[Override]
     public function getRouteKeyName()
     {
         return 'uuid';

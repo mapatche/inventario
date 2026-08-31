@@ -22,6 +22,11 @@ class Item extends Model
         'active',
     ];
 
+    public function section(): BelongsTo
+    {
+        return $this->belongsTo(Section::class);
+    }
+
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);

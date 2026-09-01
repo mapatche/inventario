@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LoansController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', function () {
@@ -30,6 +31,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('employees', EmployeeController::class);
     Route::resource('itemtypes', TypeController::class);
     Route::resource('brands', BrandController::class);
+    Route::resource('users', UserController::class);
 });
 
 require __DIR__.'/auth.php';

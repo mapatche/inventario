@@ -7,14 +7,27 @@ use App\Models\Employee;
 use App\Models\Item;
 use App\Models\Loan;
 use App\Models\Type;
+use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class LoansController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $loans = Loan::where('active', 1)->orderBy('created_at', 'desc')->paginate(10);
+
+        $user = $request->user();
+        if ($user->hasRole('admin')) {
+            $loans = Loan::where('active', 1)->orderBy('created_at', 'desc')->paginate(10);
+        } elseif ($user->hasAnyRole(['visor_oficina', 'presta_oficina'])) {
+            $loans = Loan::whereHas('item', function ($query) {
+                $query->where('section_id', 1);
+            })->orderBy('created_at', 'desc')->paginate(10);
+        } else {
+            $loans = Loan::whereHas('item', function ($query) {
+                $query->where('section_id', 2);
+            })->orderBy('created_at', 'desc')->paginate(10);
+        }
 
         return view('loans.index', compact('loans'));
     }
@@ -44,12 +57,29 @@ class LoansController extends Controller
         return redirect()->route('loans.index');
     }
 
-    public function itemsByType($id)
+    public function itemsByType($id, Request $request)
     {
-        $items = Item::with('brand')
-            ->where('type_id', $id)
-            ->available()
-            ->get();
+        $user = $request->user();
+
+        if ($user->hasRole('admin')) {
+            $items = Item::with('brand')
+                ->where('type_id', $id)
+                ->available()
+                ->get();
+
+        } elseif ($user->hasAnyRole(['visor_oficina', 'presta_oficina'])) {
+            $items = Item::with('brand')
+                ->where('type_id', $id)
+                ->where('section_id', 1)
+                ->available()
+                ->get();
+        } else {
+            $items = Item::with('brand')
+                ->where('type_id', $id)
+                ->where('section_id', 2)
+                ->available()
+                ->get();
+        }
 
         return response()->json($items);
     }

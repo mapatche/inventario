@@ -9,7 +9,7 @@
             </div>
             @canany(['prestar oficina', 'prestar patio'])
             <a href="{{ route('loans.create') }}" class="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg shadow hover:bg-blue-500 transition-colors cursor-pointer">
-                + Nuevo Item
+                + Asignar
             </a>
             @endcanany
         </div>
@@ -23,10 +23,10 @@
                         <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Marca</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Serie</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Notas</th>
-                        @role('admin')
+                        @canany(['prestar oficina', 'prestar patio'])
                         <th class="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">Acciones</th>
-                        @endrole
-                         </tr>
+                        @endcanany
+                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
                     @foreach ($loans as $loan)
@@ -37,21 +37,23 @@
                         <td class="px-6 py-4 text-sm text-gray-600">{{ $loan->item->model }}</td>
                         <td class="px-6 py-4 text-sm text-gray-600">{{ $loan->item->serial }}</td>
                         <td class="px-6 py-4 text-sm text-gray-600">{{ $loan->notes }}</td>
-                        @role('admin')
                         <td class="px-6 py-4 text-sm text-right font-medium space-x-3">
                             <div class="flex items-center justify-end gap-2">
+                            @canany(['prestar oficina', 'prestar patio'])
                                 <a href="{{ route('excelsior', $loan->id) }}" class="text-green-600 hover:text-blue-900 transition-colors">Formato</a>
+                            @endcanany
+                        @role('admin')
                                 <a href="{{ route('loans.edit', $loan) }}" class="text-blue-600 hover:text-blue-900 transition-colors">Editar</a>
                                 <form action="{{ route('loans.destroy', $loan) }}" method="POST" onsubmit="return confirm('Eliminar?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:text-red-900 transition-colors cursor-pointer">
-                                        Eliminar
+                                        Finalizar
                                     </button>
                                 </form>
+                        @endrole
                             </div>
                         </td>
-                        @endrole
                         </tr>
                     @endforeach
                 </tbody>

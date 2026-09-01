@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class,
             SectionSeeder::class,
             ItemSeeder::class,
-            LoanSeeder::class,
+            // LoanSeeder::class,
             PrivilegesSeeder::class,
         ]);
     }

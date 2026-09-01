@@ -3,9 +3,7 @@
       <select name="type_id" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
         @foreach ($types as $type)
             <option value="{{ $type->id }}" 
-              {{ old('type_id', $item->type_id ?? '') == $type->id ? 'selected' : '' }}
-
-              > {{ $type->name }}</option>
+              {{ old('type_id', $item->type_id ?? '') == $type->id ? 'selected' : '' }} > {{ $type->name }}</option>
         @endforeach
     </select>
   </div>
@@ -20,6 +18,19 @@
         @endforeach
     </select>
   </div>
+
+  @role('admin')
+  <div>
+  <label class="block text-sm font-semibold text-gray-700 mb-1">Seccion</label>
+  <select name="section_id" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+      @foreach ($sections as $section)
+          <option value="{{ $section->id }}"
+            {{ old('section_id', $item->section_id ?? '') == $section->id ? 'selected' : '' }}
+            > {{ $section->name }}</option>
+      @endforeach
+  </select>
+</div>
+@endrole
 
   <div>
     <label class="block text-sm font-semibold text-gray-700 mb-1">Modelo</label>

@@ -31,6 +31,7 @@ class SaveItemRequest extends FormRequest
             'brand_id' => 'required|integer|exists:brands,id',
             'active' => 'sometimes|boolean',
             'section_id' => 'sometimes|integer|exists:sections,id',
+            'bill_location' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
 

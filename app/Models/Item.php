@@ -21,6 +21,7 @@ class Item extends Model
         'brand_id',
         'active',
         'section_id',
+        'bill_location',
     ];
 
     public function section(): BelongsTo

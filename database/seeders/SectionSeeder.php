@@ -9,6 +9,12 @@ class SectionSeeder extends Seeder
 {
     public function run(): void
     {
-        Section::factory()->count(2)->create();
+        $sections = ['Interno', 'Externo'];
+        foreach ($sections as $section) {
+            Section::query()->updateOrCreate(
+                ['name' => $section],
+                []
+            );
+        }
     }
 }

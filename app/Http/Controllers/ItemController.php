@@ -39,6 +39,11 @@ class ItemController extends Controller
     {
         $data = $request->validated();
         $user = $request->user();
+
+        if ($request->hasFile('bill_location')) {
+            $data['bill_location'] = $request->file('bill_location')->store('items', 'public');
+        }
+
         if ($user->hasRole('presta_oficina')) {
             $data['section_id'] = 1;
         } elseif ($user->hasRole('presta_patio')) {
@@ -61,6 +66,12 @@ class ItemController extends Controller
     public function update(SaveItemRequest $request, Item $item)
     {
         $data = $request->validated();
+        if ($request->hasFile('bill_location')) {
+            $data['bill_location'] = $request->file('bill_location')->store('items', 'public');
+        } else {
+            unset($data['bill_location']);
+        }
+
         $item->update($data);
 
         return redirect()->route('items.index');

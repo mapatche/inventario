@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('type_id')->constrained();
             $table->foreignId('brand_id')->constrained();
             $table->boolean('active')->default(1);
+            $table->string('bill_location')->nullable();
             $table->timestamps();
         });
     }

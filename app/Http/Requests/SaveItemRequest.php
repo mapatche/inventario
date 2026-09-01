@@ -30,6 +30,7 @@ class SaveItemRequest extends FormRequest
             'type_id' => 'required|integer|exists:types,id',
             'brand_id' => 'required|integer|exists:brands,id',
             'active' => 'sometimes|boolean',
+            'section_id' => 'sometimes|integer|exists:sections,id',
         ];
     }
 

@@ -20,6 +20,7 @@ class Item extends Model
         'type_id',
         'brand_id',
         'active',
+        'section_id',
     ];
 
     public function section(): BelongsTo

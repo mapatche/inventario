@@ -9,6 +9,14 @@ class DepartmentSeeder extends Seeder
 {
     public function run(): void
     {
-        Department::factory()->count(3)->create();
+        $departamentos = ['Contabilidad', 'Sistemas', 'Legal', 'Ventas', 'Compras', 'RRHH', 'Piso', 'Seguridad'];
+
+        foreach ($departamentos as $depto) {
+            Department::query()->updateOrCreate(
+                ['name' => $depto],
+                []
+            );
+        }
+
     }
 }

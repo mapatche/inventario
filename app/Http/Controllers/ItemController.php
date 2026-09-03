@@ -15,12 +15,16 @@ class ItemController extends Controller
     {
 
         $user = $request->user();
-        if ($user->hasRole('admin')) {
+        if ($user->hasRole('ADMIN')) {
             $items = Item::where('active', 1)->paginate(10);
-        } elseif ($user->hasAnyRole(['visor_oficina', 'presta_oficina'])) {
+        } elseif ($user->hasAnyRole(['OT SISTEMA VISOR', 'OT SISTEMA PRESTA'])) {
             $items = Item::where('active', 1)->where('section_id', 1)->paginate(10);
-        } else {
+        } elseif ($user->hasAnyRole(['OT PATIO MRO VISOR', 'OT PATIO MRO PRESTA'])) {
             $items = Item::where('active', 1)->where('section_id', 2)->paginate(10);
+        } elseif ($user->hasAnyRole(['FISCOMEX SISTEMAS VISOR', 'FISCOMEX SISTEMAS PRESTA'])) {
+            $items = Item::where('active', 1)->where('section_id', 3)->paginate(10);
+        } elseif ($user->hasAnyRole(['FISCOMEX PATIO VISOR', 'FISCOMEX PATIO PRESTA'])) {
+            $items = Item::where('active', 1)->where('section_id', 4)->paginate(10);
         }
 
         return view('items.index', compact('items'));
@@ -44,10 +48,14 @@ class ItemController extends Controller
             $data['bill_location'] = $request->file('bill_location')->store('items', 'public');
         }
 
-        if ($user->hasRole('presta_oficina')) {
+        if ($user->hasRole('OT SISTEMA PRESTA')) {
             $data['section_id'] = 1;
-        } elseif ($user->hasRole('presta_patio')) {
+        } elseif ($user->hasRole('OT PATIO MRO PRESTA')) {
             $data['section_id'] = 2;
+        } elseif ($user->hasRole('FISCOMEX SISTEMAS PRESTA')) {
+            $data['section_id'] = 3;
+        } elseif ($user->hasRole('FISCOMEX PATIO PRESTA')) {
+            $data['section_id'] = 4;
         }
         Item::create($data);
 

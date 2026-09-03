@@ -17,15 +17,23 @@ class LoansController extends Controller
     {
 
         $user = $request->user();
-        if ($user->hasRole('admin')) {
+        if ($user->hasRole('ADMIN')) {
             $loans = Loan::where('active', 1)->orderBy('created_at', 'desc')->paginate(10);
-        } elseif ($user->hasAnyRole(['visor_oficina', 'presta_oficina'])) {
+        } elseif ($user->hasAnyRole(['OT SISTEMA VISOR', 'OT SISTEMA PRESTA'])) {
             $loans = Loan::whereHas('item', function ($query) {
                 $query->where('section_id', 1);
             })->orderBy('created_at', 'desc')->paginate(10);
-        } else {
+        } elseif ($user->hasAnyRole(['OT PATIO MRO VISOR', 'OT PATIO MRO PRESTA'])) {
             $loans = Loan::whereHas('item', function ($query) {
                 $query->where('section_id', 2);
+            })->orderBy('created_at', 'desc')->paginate(10);
+        } elseif ($user->hasAnyRole(['FISCOMEX SISTEMAS VISOR', 'FISCOMEX SISTEMAS PRESTA'])) {
+            $loans = Loan::whereHas('item', function ($query) {
+                $query->where('section_id', 3);
+            })->orderBy('created_at', 'desc')->paginate(10);
+        } elseif ($user->hasAnyRole(['FISCOMEX PATIO VISOR', 'FISCOMEX PATIO PRESTA'])) {
+            $loans = Loan::whereHas('item', function ($query) {
+                $query->where('section_id', 4);
             })->orderBy('created_at', 'desc')->paginate(10);
         }
 
@@ -61,22 +69,34 @@ class LoansController extends Controller
     {
         $user = $request->user();
 
-        if ($user->hasRole('admin')) {
+        if ($user->hasRole('ADMIN')) {
             $items = Item::with('brand')
                 ->where('type_id', $id)
                 ->available()
                 ->get();
 
-        } elseif ($user->hasAnyRole(['visor_oficina', 'presta_oficina'])) {
+        } elseif ($user->hasAnyRole(['OT SISTEMA VISOR', 'OT SISTEMA PRESTA'])) {
             $items = Item::with('brand')
                 ->where('type_id', $id)
                 ->where('section_id', 1)
                 ->available()
                 ->get();
-        } else {
+        } elseif ($user->hasAnyRole(['OT PATIO MRO VISOR', 'OT PATIO MRO PRESTA'])) {
             $items = Item::with('brand')
                 ->where('type_id', $id)
                 ->where('section_id', 2)
+                ->available()
+                ->get();
+        } elseif ($user->hasAnyRole(['FISCOMEX SISTEMAS VISOR', 'FISCOMEX SISTEMAS PRESTA'])) {
+            $items = Item::with('brand')
+                ->where('type_id', $id)
+                ->where('section_id', 3)
+                ->available()
+                ->get();
+        } elseif ($user->hasAnyRole(['FISCOMEX PATIO VISOR', 'FISCOMEX PATIO PRESTA'])) {
+            $items = Item::with('brand')
+                ->where('type_id', $id)
+                ->where('section_id', 4)
                 ->available()
                 ->get();
         }

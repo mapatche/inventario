@@ -30,7 +30,7 @@
           </summary>
           
           <div class="pl-6 pt-1 space-y-1">
-          @role('admin')
+          @role('ADMIN')
             <a href="{{ route('departments.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('departments.*') ? 'font-bold' : '' }}">Departamentos</a>
             <a href="{{ route('employees.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('employees.*') ? 'font-bold' : '' }}">Empleados</a>
           @endrole
@@ -48,7 +48,7 @@
           </summary>
           
           <div class="pl-6 pt-1 space-y-1">
-          @role('admin')
+          @role('ADMIN')
             <a href="{{ route('itemtypes.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('itemtypes.*') ? 'font-bold' : '' }}">Tipos</a>
             <a href="{{ route('brands.index') }}" class="block px-3 py-2 text-sm text-gray-600 rounded-lg hover:bg-gray-100 {{ request()->routeIs('brands.*') ? 'font-bold' : '' }}">Marcas</a>
           @endrole
@@ -56,7 +56,7 @@
           </div>
         </details>
 
-        @role('admin')
+        @role('ADMIN')
         <details class="group" {{ request()->routeIs('users.*', ) ? 'open' : '' }} >
           <summary class="flex items-center justify-between px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 cursor-pointer font-medium select-none">
             <span>Admon</span>

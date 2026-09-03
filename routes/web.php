@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('loans/excelame/{id}', [LoansController::class, 'loanToSheet'])->name('excelsior');
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'role:ADMIN'])->group(function () {
     Route::resource('departments', DepartmentController::class);
     Route::resource('employees', EmployeeController::class);
     Route::resource('itemtypes', TypeController::class);

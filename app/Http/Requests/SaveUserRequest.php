@@ -20,7 +20,13 @@ class SaveUserRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users', 'email')->ignore($userId)],
             'password' => [$userId ? 'nullable' : 'required', 'string', 'min:8', 'confirmed'],
-            'user_role' => ['required', 'string', Rule::in(['visor_oficina', 'visor_patio', 'prestador_oficina', 'prestador_patio', 'admin'])],
+            'user_role' => [
+                'required',
+                'string',
+                Rule::exists('roles', 'name')->where(function ($query) {
+                    return $query->where('guard_name', 'web');
+                }),
+            ],
         ];
     }
 

@@ -7,7 +7,10 @@
                 <h1 class="text-3xl font-bold tracking-tight text-gray-900">Visor de Asignaciones</h1>
                 <p class="mt-2 text-sm text-gray-600">Lista completa de los items asignados en el sistema.</p>
             </div>
-            @canany(['prestar oficina', 'prestar patio'])
+            @canany(['OT SISTEMA PRESTA',
+                    'OT PATIO MRO PRESTA',
+                    'FISCOMEX SISTEMAS PRESTA',
+                    'FISCOMEX PATIO PRESTA',])
             <a href="{{ route('loans.create') }}" class="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg shadow hover:bg-blue-500 transition-colors cursor-pointer">
                 + Asignar
             </a>
@@ -23,7 +26,10 @@
                         <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Marca</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Serie</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Notas</th>
-                        @canany(['prestar oficina', 'prestar patio'])
+                        @canany(['OT SISTEMA PRESTA',
+                                'OT PATIO MRO PRESTA',
+                                'FISCOMEX SISTEMAS PRESTA',
+                                'FISCOMEX PATIO PRESTA',])
                         <th class="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wider text-gray-500">Acciones</th>
                         @endcanany
                      </tr>
@@ -39,10 +45,13 @@
                         <td class="px-6 py-4 text-sm text-gray-600">{{ $loan->notes }}</td>
                         <td class="px-6 py-4 text-sm text-right font-medium space-x-3">
                             <div class="flex items-center justify-end gap-2">
-                            @canany(['prestar oficina', 'prestar patio'])
+                            @canany(['OT SISTEMA PRESTA',
+                                    'OT PATIO MRO PRESTA',
+                                    'FISCOMEX SISTEMAS PRESTA',
+                                    'FISCOMEX PATIO PRESTA',])
                                 <a href="{{ route('excelsior', $loan->id) }}" class="text-green-600 hover:text-blue-900 transition-colors">Formato</a>
                             @endcanany
-                        @role('admin')
+                        @role('ADMIN')
                                 <a href="{{ route('loans.edit', $loan) }}" class="text-blue-600 hover:text-blue-900 transition-colors">Editar</a>
                                 <form action="{{ route('loans.destroy', $loan) }}" method="POST" onsubmit="return confirm('Eliminar?');">
                                     @csrf

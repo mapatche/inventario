@@ -9,7 +9,10 @@ class SectionSeeder extends Seeder
 {
     public function run(): void
     {
-        $sections = ['Interno', 'Externo'];
+        $sections = ['OT SISTEMAS',
+            'OT PATIO',
+            'FISCOMEX SISTEMAS',
+            'FISCOMEX PATIO', ];
         foreach ($sections as $section) {
             Section::query()->updateOrCreate(
                 ['name' => $section],

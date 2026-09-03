@@ -19,7 +19,7 @@
     </select>
   </div>
 
-  @role('admin')
+  @role('ADMIN')
   <div>
   <label class="block text-sm font-semibold text-gray-700 mb-1">Seccion</label>
   <select name="section_id" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">

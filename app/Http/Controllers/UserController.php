@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveUserRequest;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -16,23 +17,28 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.create');
+        $roles = Role::all();
+
+        return view('users.create', compact('roles'));
     }
 
     public function store(SaveUserRequest $request)
     {
         $data = $request->validated();
         $user = User::create($data);
-        $user->assignRole($data['user_role']);
+        $role = Role::where('name', $data['user_role'])->where('guard_name', 'web')->first();
+
+        $user->assignRole($role);
 
         return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente.');
     }
 
     public function edit(User $user)
     {
+        $roles = Role::all();
         $userRole = $user->roles->first() ? $user->roles->first()->name : null;
 
-        return view('users.edit', compact('user', 'userRole'));
+        return view('users.edit', compact('user', 'userRole', 'roles'));
     }
 
     public function update(SaveUserRequest $request, User $user)

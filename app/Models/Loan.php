@@ -17,6 +17,8 @@ class Loan extends Model
         'active',
         'employee_id',
         'item_id',
+        'require_out',
+        'authorized_by_id',
     ];
 
     public function uniqueIds()

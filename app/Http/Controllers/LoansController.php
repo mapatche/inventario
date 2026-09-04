@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\Item;
 use App\Models\Loan;
 use App\Models\Type;
+use App\Models\User;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -44,13 +45,14 @@ class LoansController extends Controller
     {
         $types = Type::where('active', 1)->get();
         $employees = Employee::where('active', 1)->get();
+        $aths = User::role('LOANS ADMIN')->get();
 
-        return view('loans.create', compact('types', 'employees'));
-
+        return view('loans.create', compact('types', 'employees', 'aths'));
     }
 
     public function store(SaveLoanRequest $request)
     {
+        // dd($request->all());
         $data = $request->validated();
         Loan::create($data);
 

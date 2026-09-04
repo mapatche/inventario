@@ -14,12 +14,7 @@ class PrivilegesSeeder extends Seeder
     public function run(): void
     {
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
-        // $permissions = [
-        //     'ver patio',
-        //     'ver oficina',
-        //     'prestar patio',
-        //     'prestar oficina',
-        // ];
+
         $permissions = [
             'OT SISTEMA VISOR',
             'OT SISTEMA PRESTA',
@@ -29,16 +24,12 @@ class PrivilegesSeeder extends Seeder
             'FISCOMEX SISTEMAS PRESTA',
             'FISCOMEX PATIO VISOR',
             'FISCOMEX PATIO PRESTA',
+            'LOANS ADMIN',
         ];
 
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
-
-        // $visorPatioRole = Role::firstOrCreate(['name' => 'visor_patio']);
-        // $visorOficinaRole = Role::firstOrCreate(['name' => 'visor_oficina']);
-        // $prestaOficinaRole = Role::firstOrCreate(['name' => 'presta_oficina']);
-        // $prestaPatioRole = Role::firstOrCreate(['name' => 'presta_patio']);
 
         $vis_ot_sis = Role::firstOrCreate(['name' => 'OT SISTEMA VISOR']);
         $pre_ot_sis = Role::firstOrCreate(['name' => 'OT SISTEMA PRESTA']);
@@ -49,6 +40,7 @@ class PrivilegesSeeder extends Seeder
         $vis_fis_patio = Role::firstOrCreate(['name' => 'FISCOMEX PATIO VISOR']);
         $pre_fis_patio = Role::firstOrCreate(['name' => 'FISCOMEX PATIO PRESTA']);
         $adminRole = Role::firstOrCreate(['name' => 'ADMIN']);
+        $loanadminRole = Role::firstOrCreate(['name' => 'LOANS ADMIN']);
 
         $vis_ot_sis->syncPermissions(['OT SISTEMA VISOR']);
         $pre_ot_sis->syncPermissions(['OT SISTEMA PRESTA']);
@@ -59,24 +51,40 @@ class PrivilegesSeeder extends Seeder
         $vis_fis_patio->syncPermissions(['FISCOMEX PATIO VISOR']);
         $pre_fis_patio->syncPermissions(['FISCOMEX PATIO PRESTA']);
         $adminRole->syncPermissions(Permission::all());
-
-        // $visorPatioRole->syncPermissions(['ver patio']);
-        // $visorOficinaRole->syncPermissions(['ver oficina']);
-        // $prestaOficinaRole->syncPermissions(['prestar oficina']);
-        // $prestaPatioRole->syncPermissions(['prestar patio']);
+        $loanadminRole->syncPermissions(['LOANS ADMIN']);
 
         $adminUser = User::firstOrCreate(
             ['email' => 'ojrzsrmnt@gmail.com'],
             [
-                'name' => 'Administrador',
+                'name' => 'Octavio',
+                'password' => Hash::make('qwerty'),
+            ]
+        );
+        $adminUser2 = User::firstOrCreate(
+            ['email' => 'dsantiago@one-touch.com.mx'],
+            [
+                'name' => 'Daniel',
+                'password' => Hash::make('fisco2020'),
+            ]
+        );
+        $adminUser3 = User::firstOrCreate(
+            ['email' => 'missael@fiscomexmxli.com'],
+            [
+                'name' => 'Missael',
+                'password' => Hash::make('fiscomex123'),
+            ]
+        );
+        $loanAdmin = User::firstOrCreate(
+            ['email' => 'correo@correo.com'],
+            [
+                'name' => 'Autorizador',
                 'password' => Hash::make('qwerty'),
             ]
         );
 
         $adminUser->assignRole($adminRole);
-        // $userVisorPatio->assignRole($visorPatioRole);
-        // $userVisorOficina->assignRole($visorOficinaRole);
-        // $userPrestaOficina->assignRole($prestaOficinaRole);
-        // $userPrestaPatio->assignRole($prestaPatioRole);
+        $adminUser2->assignRole($adminRole);
+        $adminUser3->assignRole($adminRole);
+        $loanAdmin->assignRole($loanadminRole);
     }
 }

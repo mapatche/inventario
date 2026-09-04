@@ -18,6 +18,8 @@ class SaveLoanRequest extends FormRequest
             'active' => 'sometimes|boolean',
             'employee_id' => 'required|integer|exists:employees,id',
             'item_id' => 'required|integer|exists:items,id',
+            'require_out' => 'boolean',
+            'authorized_by_id' => 'required_if:require_out,1|nullable|exists:users,id',
         ];
     }
 

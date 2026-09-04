@@ -15,6 +15,10 @@ return new class extends Migration
             $table->boolean('active')->default(1);
             $table->foreignId('employee_id')->constrained();
             $table->foreignId('item_id')->constrained();
+            $table->boolean('require_out')->default(0);
+            $table->foreignId('authorized_by_id')
+                ->nullable()
+                ->constrained('users');
             $table->timestamps();
         });
     }

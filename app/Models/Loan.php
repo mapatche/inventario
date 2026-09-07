@@ -36,6 +36,11 @@ class Loan extends Model
         return $this->belongsTo(Item::class);
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'authorized_by_id');
+    }
+
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);

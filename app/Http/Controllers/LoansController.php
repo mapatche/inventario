@@ -108,8 +108,7 @@ class LoansController extends Controller
 
     public function loanToSheet($idLoan)
     {
-        $loan = Loan::with('employee.department', 'item.brand', 'item.type')->findOrFail($idLoan);
-
+        $loan = Loan::with('employee.department', 'item.brand', 'item.type', 'user')->findOrFail($idLoan);
         $rutaArchivo = storage_path('app/templates/formato_prestamo.xlsx');
         $spreadsheet = IOFactory::load($rutaArchivo);
         $sheet = $spreadsheet->getActiveSheet();
@@ -124,6 +123,10 @@ class LoansController extends Controller
         $sheet->setCellValue('B24', $loan->created_at);
         $sheet->setCellValue('B25', $loan->uuid);
         $sheet->setCellValue('B26', $loan->notes);
+
+        if ($loan->require_out) {
+            $sheet->setCellValue('A29', $loan->authorized_by_id ? 'Requiere salida del area de trabajo, autorizado por: '.$loan->user->name : '');
+        }
 
         $writer = new Xlsx($spreadsheet);
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

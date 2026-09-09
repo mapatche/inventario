@@ -50,9 +50,30 @@
                                     'FISCOMEX SISTEMAS PRESTA',
                                     'FISCOMEX PATIO PRESTA',])
                                 <a href="{{ route('excelsior', $loan->id) }}" class="text-green-600 hover:text-blue-900 transition-colors">Formato</a>
+                                @if(is_null($loan->loan_signature)){
+                                    <a href="#" 
+                                        onclick="document.getElementById('loan_signature_input').click(); return false;" 
+                                        class="inline-block p-2 text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500 transition-colors duration-200 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+                                        title="Subir imagen">
+                                        
+                                        <svg xmlns="http://w3.org" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                        </svg>
+                                        </a>
+
+                                        <input type="file" 
+                                            id="loan_signature_input" 
+                                            accept="image/*" 
+                                            class="hidden" 
+                                            data-employee="{{ $loan->employee_id }}" 
+                                            data-item="{{ $loan->item_id }}" 
+                                            onchange="subirImagen(this)" />
+                                }
+                                @endif
+
                             @endcanany
                         @role('ADMIN')
-                                <a href="{{ route('loans.edit', $loan) }}" class="text-blue-600 hover:text-blue-900 transition-colors">Editar</a>
+                                {{-- <a href="{{ route('loans.edit', $loan) }}" class="text-blue-600 hover:text-blue-900 transition-colors">Editar</a> --}}
                                 <form action="{{ route('loans.destroy', $loan) }}" method="POST" onsubmit="return confirm('Eliminar?');">
                                     @csrf
                                     @method('DELETE')
@@ -72,4 +93,45 @@
             </div>
         </div>
     </div>
+
+
+<script>
+async function subirImagen(input) {
+  if (!input.files || input.files.length === 0) return;
+  
+  const archivo = input.files[0];
+  const formData = new FormData();
+  formData.append('loan_signature', archivo); 
+  formData.append('_method', 'PUT'); 
+  formData.append('_token', '{{ csrf_token() }}'); 
+  formData.append('employee_id', input.dataset.employee);
+  formData.append('item_id', input.dataset.item);
+
+  try {
+    const respuesta = await fetch("{{ route('loans.update', $loan) }}", { 
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    if (respuesta.ok) {
+      alert('Imagen subida con éxito');
+      window.location.href = "{{ route('loans.index') }}";
+    } else {
+      const errores = await respuesta.json();
+      console.error('Errores del servidor:', errores);
+      alert('Error en la validación del servidor. Revisa la consola.');
+    }
+    
+  } catch (error) {
+    console.error('Error en la conexión:', error);
+    alert('Error de red al intentar conectar con el servidor.');
+  } finally {
+    input.value = '';
+  }
+}
+
+</script>
+
 @endsection

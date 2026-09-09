@@ -19,6 +19,7 @@ class Loan extends Model
         'item_id',
         'require_out',
         'authorized_by_id',
+        'loan_signature',
     ];
 
     public function uniqueIds()

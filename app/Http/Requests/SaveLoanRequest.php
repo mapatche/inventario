@@ -16,10 +16,11 @@ class SaveLoanRequest extends FormRequest
         return [
             'notes' => 'nullable|string|max:255',
             'active' => 'sometimes|boolean',
-            'employee_id' => 'required|integer|exists:employees,id',
-            'item_id' => 'required|integer|exists:items,id',
+            'employee_id' => 'sometimes|required|integer|exists:employees,id',
+            'item_id' => 'sometimes|required|integer|exists:items,id',
             'require_out' => 'boolean',
             'authorized_by_id' => 'required_if:require_out,1|nullable|exists:users,id',
+            'loan_signature' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('authorized_by_id')
                 ->nullable()
                 ->constrained('users');
+            $table->string('loan_signature')->nullable();
             $table->timestamps();
         });
     }

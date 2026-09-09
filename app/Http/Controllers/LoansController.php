@@ -52,12 +52,35 @@ class LoansController extends Controller
 
     public function store(SaveLoanRequest $request)
     {
-        // dd($request->all());
         $data = $request->validated();
+        if ($request->hasFile('loan_signature')) {
+            $data['loan_signature'] = $request->file('loan_signature')->store('items', 'public');
+        }
         Loan::create($data);
 
         return redirect()->route('loans.index');
 
+    }
+
+    public function update(SaveLoanRequest $request, Loan $loan)
+    {
+        $data = $request->validated();
+
+        if ($request->hasFile('loan_signature')) {
+            $data['loan_signature'] = $request->file('loan_signature')->store('loans', 'public');
+        }
+
+        $loan->update($data);
+
+        // Ajuste para peticiones AJAX/Fetch
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Préstamo actualizado con éxito.',
+            ]);
+        }
+
+        return redirect()->route('loans.index');
     }
 
     public function destroy(Loan $loan)
